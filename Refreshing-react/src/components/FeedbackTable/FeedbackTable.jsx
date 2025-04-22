@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { TableRowFeedback } from "../TableRow/TableRow";
 import NewEntryInput from "../NewEntryInput/NewEntryInput";
+import { addNewFeedback } from "../../dumb_data";
 
 function FeedbackTable({ customerList, selectedCustomerId }) {
   const [feedbackData, setFeedbackData] = useState(undefined);
@@ -11,6 +12,18 @@ function FeedbackTable({ customerList, selectedCustomerId }) {
       (customer) => customer.id === customerId
     );
     setFeedbackData(customer.feedbacks);
+  };
+
+  const handleCancel = () => {
+    setIsAddNewFeedback(false);
+  };
+
+  const handleAdding = (feedbackText) => {
+    addNewFeedback(selectedCustomerId, feedbackText);
+  };
+
+  const handleButtonToggle = () => {
+    setIsAddNewFeedback(!isAddNewFeedback);
   };
 
   useEffect(() => {
@@ -25,7 +38,7 @@ function FeedbackTable({ customerList, selectedCustomerId }) {
         <h2 className="text-2xl">Feedback</h2>
         <button
           disabled={feedbackData ? false : true}
-          onClick={() => setIsAddNewFeedback(!isAddNewFeedback)}
+          onClick={handleButtonToggle}
           className="py-1 px-5 bg-amber-200 rounded font-bold disabled:bg-gray-300"
         >
           Add new
@@ -33,7 +46,13 @@ function FeedbackTable({ customerList, selectedCustomerId }) {
       </div>
       <div className="h-full">
         <ul className="flex flex-col">
-          {isAddNewFeedback && <NewEntryInput placeholder="New Feedback" />}
+          {isAddNewFeedback && (
+            <NewEntryInput
+              placeholder="New Feedback"
+              onCancel={handleCancel}
+              onAdd={handleAdding}
+            />
+          )}
           {feedbackData ? (
             feedbackData.map((feedback) => (
               <TableRowFeedback feedbackText={feedback.feedbackMessage} />

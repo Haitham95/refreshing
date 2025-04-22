@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 
-function NewEntryInput({ placeholder, onCancel }) {
+function NewEntryInput({ placeholder, onCancel, onAdd }) {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
 
   const handleKeydownEvent = (e) => {
     if (e.key === "Enter" && inputValue) {
-      console.log("added new input: " + inputValue);
+      onAdd(inputValue);
+      onCancel();
     } else if (e.key === "Escape") {
       onCancel();
     }

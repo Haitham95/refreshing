@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { TableRowCustomer } from "../TableRow/TableRow";
 import NewEntryInput from "../NewEntryInput/NewEntryInput";
+import { addNewCustomer } from "../../dumb_data";
 
 function CustomerTable({ customers, onSelectCustomer, selectedCustomerId }) {
   const [isAddNewCustomer, setIsAddNewCustomer] = useState(false);
 
-  const handleCancel = (e) => {
+  const handleCancel = () => {
     setIsAddNewCustomer(false);
   };
 
-  const handleButtonToggle = (e) => {
+  const handleAdding = (customerName) => {
+    addNewCustomer(customerName);
+  };
+
+  const handleButtonToggle = () => {
     setIsAddNewCustomer(!isAddNewCustomer);
   };
 
@@ -27,7 +32,11 @@ function CustomerTable({ customers, onSelectCustomer, selectedCustomerId }) {
       <div className="border-r h-full">
         <ul className="flex flex-col">
           {isAddNewCustomer && (
-            <NewEntryInput placeholder="New Customer" onCancel={handleCancel} />
+            <NewEntryInput
+              placeholder="New Customer"
+              onCancel={handleCancel}
+              onAdd={handleAdding}
+            />
           )}
           {customers.map((customer) => (
             <TableRowCustomer
