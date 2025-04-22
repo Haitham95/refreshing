@@ -1,8 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function NewEntryInput({ placeholder }) {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
+
+  const handleKeydownEvent = (e) => {
+    if (e.key === "Enter" && inputValue) {
+      console.log("added new input: " + inputValue);
+    } else if (e.key === "Escape") {
+      console.log("canceled operation: " + inputValue);
+    }
+  };
+
   // when the component mounts, Focus on it
   useEffect(() => {
     if (inputRef.current) inputRef.current.focus();
@@ -15,6 +24,7 @@ function NewEntryInput({ placeholder }) {
       placeholder={placeholder}
       value={inputValue}
       onChange={(e) => setInputValue(e.target.value)}
+      onKeyDown={handleKeydownEvent}
       ref={inputRef}
     />
   );
