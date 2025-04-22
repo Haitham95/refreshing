@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import CustomerTable from "../CustomerTable/CustomerTable";
 import FeedbackTable from "../FeedbackTable/FeedbackTable";
+import { DATA } from "../../dumb_data";
 
-function CustomerFeedbackTable({ data }) {
+function CustomerFeedbackTable() {
   const [selectedCustomerId, setSelectedCustomerId] = useState(0);
-  const customers = data;
+  const customers = DATA;
 
   return (
     <main className="min-h-screen flex justify-center items-center">
@@ -22,7 +23,7 @@ function CustomerFeedbackTable({ data }) {
           />
           <FeedbackTable
             selectedCustomerId={selectedCustomerId}
-            customerList={data}
+            customerList={customers}
           />
         </div>
       </div>
