@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TableRowFeedback } from "../TableRow/TableRow";
+import NewEntryInput from "../NewEntryInput/NewEntryInput";
 
 function FeedbackTable({ customerList, selectedCustomerId }) {
   const [feedbackData, setFeedbackData] = useState(undefined);
@@ -32,13 +33,7 @@ function FeedbackTable({ customerList, selectedCustomerId }) {
       </div>
       <div className="h-full">
         <ul className="flex flex-col">
-          {isAddNewFeedback && (
-            <input
-              type="text"
-              className="px-4 border-b py-2"
-              placeholder="New Feedback"
-            />
-          )}
+          {isAddNewFeedback && <NewEntryInput placeholder="New Feedback" />}
           {feedbackData ? (
             feedbackData.map((feedback) => (
               <TableRowFeedback feedbackText={feedback.feedbackMessage} />

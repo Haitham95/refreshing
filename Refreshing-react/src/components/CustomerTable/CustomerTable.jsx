@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TableRowCustomer } from "../TableRow/TableRow";
+import NewEntryInput from "../NewEntryInput/NewEntryInput";
 
 function CustomerTable({ customers, onSelectCustomer, selectedCustomerId }) {
   const [isAddNewCustomer, setIsAddNewCustomer] = useState(false);
@@ -17,13 +18,7 @@ function CustomerTable({ customers, onSelectCustomer, selectedCustomerId }) {
       </div>
       <div className="border-r h-full">
         <ul className="flex flex-col">
-          {isAddNewCustomer && (
-            <input
-              type="text"
-              className="px-4 border-b py-2"
-              placeholder="New Customer"
-            />
-          )}
+          {isAddNewCustomer && <NewEntryInput placeholder="New Customer" />}
           {customers.map((customer) => (
             <TableRowCustomer
               selectedCustomerId={selectedCustomerId}
