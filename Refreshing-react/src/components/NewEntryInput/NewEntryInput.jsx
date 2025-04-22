@@ -12,9 +12,19 @@ function NewEntryInput({ placeholder, onCancel }) {
     }
   };
 
+  const handleClickOutside = (e) => {
+    if (inputRef.current && !inputRef.current.contains(e.target)) {
+      onCancel();
+    }
+  };
+
   // when the component mounts, Focus on it
   useEffect(() => {
     if (inputRef.current) inputRef.current.focus();
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
