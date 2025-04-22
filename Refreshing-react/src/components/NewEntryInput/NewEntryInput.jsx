@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-function NewEntryInput({ placeholder }) {
+function NewEntryInput({ placeholder, onCancel }) {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
 
@@ -8,7 +8,7 @@ function NewEntryInput({ placeholder }) {
     if (e.key === "Enter" && inputValue) {
       console.log("added new input: " + inputValue);
     } else if (e.key === "Escape") {
-      console.log("canceled operation: " + inputValue);
+      onCancel();
     }
   };
 

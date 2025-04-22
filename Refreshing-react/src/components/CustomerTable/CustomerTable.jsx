@@ -26,7 +26,9 @@ function CustomerTable({ customers, onSelectCustomer, selectedCustomerId }) {
       </div>
       <div className="border-r h-full">
         <ul className="flex flex-col">
-          {isAddNewCustomer && <NewEntryInput placeholder="New Customer" />}
+          {isAddNewCustomer && (
+            <NewEntryInput placeholder="New Customer" onCancel={handleCancel} />
+          )}
           {customers.map((customer) => (
             <TableRowCustomer
               selectedCustomerId={selectedCustomerId}
