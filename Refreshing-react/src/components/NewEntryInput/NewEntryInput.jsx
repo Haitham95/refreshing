@@ -3,6 +3,10 @@ import React, { useRef, useState } from "react";
 function NewEntryInput({ placeholder }) {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
+  // when the component mounts, Focus on it
+  useEffect(() => {
+    if (inputRef.current) inputRef.current.focus();
+  }, []);
 
   return (
     <input
